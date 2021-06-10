@@ -28,7 +28,7 @@ jobs:
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
     - name: Build commons  
-      run: mvn -B package --file v1.0.0-commons/pom.xml
+      run: mvn -B install --file v1.0.0-commons/pom.xml
     - name: Build solution  
       run: mvn -B package --file v1.0.0-solution/pom.xml
     - name: Build demo  
