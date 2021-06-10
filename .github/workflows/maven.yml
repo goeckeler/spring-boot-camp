@@ -14,9 +14,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        module: [ v1.0.0-commons, v1.0.0-solution, v0.1.0-demo, v0.2.0-lab ]
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 11
@@ -30,5 +27,11 @@ jobs:
         path: ~/.m2
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
-    - name: Maven build ${{matrix.module}}  
-      run: mvn -B package --file ${{matrix.module}}/pom.xml
+    - name: Build commons  
+      run: mvn -B package --file v1.0.0-commons/pom.xml
+    - name: Build solution  
+      run: mvn -B package --file v1.0.0-solution/pom.xml
+    - name: Build demo  
+      run: mvn -B package --file v0.1.0-demo/pom.xml
+    - name: Build lab  
+      run: mvn -B package --file v0.2.0-lab/pom.xml
